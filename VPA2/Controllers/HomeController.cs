@@ -66,13 +66,17 @@ namespace VenalPenal.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Documents(HttpPostedFileBase file)
+        public ActionResult Documents(HttpPostedFileBase file, DocUpload d)
         {
             if (ModelState.IsValid)
             {
                 if (file == null)
                 {
-                    ModelState.AddModelError("File", "Please Upload Your file");
+                    ModelState.AddModelError("File", "Please choose a file to upload.");
+                }
+                if (d.token == null)
+                {
+                    ModelState.AddModelError("Token", "Please enter your token.");
                 }
                 else if (file.ContentLength > 0)
                 {
@@ -84,26 +88,39 @@ namespace VenalPenal.Controllers
                     }
                     else
                     {
-                        var fileName = Path.GetFileName(file.FileName);
-                        var fileStream = new Byte[Request.Files[0].ContentLength];
-                        var inputStream = file.InputStream;
-                        System.IO.Stream MyStream;
-                        int FileLen = file.ContentLength;
-                        byte[] input = new byte[FileLen];
-                        // Initialize the stream.
-                        MyStream = file.InputStream;
-                        // Read the file into the byte array.
-                        MyStream.Read(input, 0, FileLen);
 
-                        var client = new RestClient("http://128.199.53.59");
-                        var request = new RestRequest(Method.POST);
-                        var contentDisposition = "attachment; filename=\"" + fileName + "\"; filename*=UTF-8''" + Uri.EscapeDataString(fileName);
-                        request.AddHeader("Content-Type", "multipart/formdata");
-                        request.AddHeader("Content-Disposition", contentDisposition);
-                        request.AddFile("file", input, fileName);
-                        RestResponse response = (RestResponse)client.Execute(request);
-                        ViewBag.Message = "File uploaded successfully";
-                        ModelState.Clear();
+                        var clientId = DocUpload.getUser(d.token);
+
+                        if (clientId == -1)
+                        {
+                            ModelState.AddModelError("Token", "Token not found.");
+                        }
+                        else
+                        {
+
+                            var fileName = Path.GetFileName(file.FileName);
+                            var newFilename = clientId + "_" + fileName;
+
+                            var fileStream = new Byte[Request.Files[0].ContentLength];
+                            var inputStream = file.InputStream;
+                            System.IO.Stream MyStream;
+                            int FileLen = file.ContentLength;
+                            byte[] input = new byte[FileLen];
+                            // Initialize the stream.
+                            MyStream = file.InputStream;
+                            // Read the file into the byte array.
+                            MyStream.Read(input, 0, FileLen);
+
+                            var client = new RestClient("http://128.199.53.59");
+                            var request = new RestRequest(Method.POST);
+                            var contentDisposition = "attachment; filename=\"" + newFilename + "\"; filename*=UTF-8''" + Uri.EscapeDataString(fileName);
+                            request.AddHeader("Content-Type", "multipart/formdata");
+                            request.AddHeader("Content-Disposition", contentDisposition);
+                            request.AddFile("file", input, fileName);
+                            RestResponse response = (RestResponse)client.Execute(request);
+                            ViewBag.Message = "File uploaded successfully";
+                            ModelState.Clear();
+                        }
                     }
                 }
             }

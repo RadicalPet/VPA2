@@ -11,7 +11,6 @@ namespace VPA2.Models
     {
         [Key]
         public int ID { get; set; }
-
         public int clientId { get; set; }
         public string documentName { get; set; }
         public string documentExtension { get; set; }

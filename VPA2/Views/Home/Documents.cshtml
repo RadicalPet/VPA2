@@ -1,5 +1,4 @@
-﻿@model VPA2.Models.Documents
-
+﻿@model VPA2.Models.DocUpload
 @{
     ViewBag.Title = "Documents";
 }
@@ -9,14 +8,18 @@
 
 @using (Html.BeginForm("Documents", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-
     <div class="form-horizontal">
         <h4>Upload Documents</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
+            @Html.ValidationMessage("Token", new { @class = "control-label col-sm-2" })
+            <br />
+            @Html.LabelFor(model => model.token, "Token", new { @class = "control-label col-sm-2" })
+            @Html.EditorFor(model => model.token, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.ValidationMessage("File")
             <label for="file" class="col-md-2">Filename:</label>
             <input type="file" name="file" />
         </div>

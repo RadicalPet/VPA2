@@ -177,6 +177,7 @@
     <Compile Include="Models\ClientContext.cs" />
     <Compile Include="Models\Clients.cs" />
     <Compile Include="Models\Documents.cs" />
+    <Compile Include="Models\DocUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

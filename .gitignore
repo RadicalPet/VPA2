@@ -154,3 +154,7 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# SQL Server files
+*/App_Data/*.mdf
+*/App_Data/*.ldf

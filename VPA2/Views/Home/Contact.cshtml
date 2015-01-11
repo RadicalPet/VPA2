@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+@model VPA2.Models.Clients
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Success</h3>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal" role="form">
+        <fieldset>
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.ValidationMessageFor(model => model.firstName)
+                <br />
+                @Html.LabelFor(model => model.firstName, "First Name", new { @class = "control-label col-sm-2" })
+                @Html.EditorFor(model => model.firstName)
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.ValidationMessageFor(model => model.lastName)
+                <br />
+                @Html.LabelFor(model => model.lastName, "Last Name", new { @class = "control-label col-sm-2" })
+                @Html.EditorFor(model => model.lastName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, "Email", new { @class = "control-label col-sm-2" })
+                @Html.EditorFor(model => model.email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.message, "Message", new { @class = "control-label col-sm-2" })
+                @Html.TextAreaFor(model => model.message, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                <input type="submit" value="submit" class="col-sm-1" />
+            </div>
+        </fieldset>
+    </div>
+}
+
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </addre

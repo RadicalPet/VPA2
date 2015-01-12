@@ -35,12 +35,49 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-2"></div>
+                <input type="button" value="encrypt" id="encrypt" class="col-sm-1" />
+                <div class="col-sm-2"></div>
                 <input type="submit" value="submit" class="col-sm-1" />
             </div>
         </fieldset>
-    </div>
+    </div>    
 }
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jsencrypt.min.js"></script>
+<script type="text/javascript">
 
+      // Call this code when the page is done loading.
+      $(function() {
+
+        // Run a quick encryption/decryption when they click.
+        $('#encrypt').click(function() {
+
+          // Encrypt with the public key...
+          var encrypt = new JSEncrypt();
+          encrypt.setPublicKey($('#pubkey').val());
+          var encMessage = encrypt.encrypt($('#message').val());
+          $('#message').val(encMessage);
+          var encFirstname = encrypt.encrypt($('#firstName').val());
+          $('#firstName').val(encFirstname);
+          var encLastname = encrypt.encrypt($('#lastName').val());
+          $('#lastName').val(encLastname);
+          var encEmail = encrypt.encrypt($('#email').val());
+          $('#email').val(encEmail);
+          
+        });
+      });
+</script>
+<textarea class="hidden" id="pubkey" rows="15" cols="65">
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0t8bqWpGC8OY0ZIXg0hM
+    uHT/WnsNn0rn2FcpFdSuZ8kAulFyUS38CnCNUGqbhjpt+/ff+5Kg87J4rJ9Q0yTv
+    JpBrhMXxDElIYqah86ZD1aelctaR+CvjN9ZKkCU4QNb8SOuqdRs1MRyalYoI7rmq
+    cSYFzv2/MGCdi4Bx/lrrYf7mKklIkbqrBJHf4dfpsxPWhwDtxKkZWLbefXID/U4R
+    Zu2y8X4OgGPSaFMH6dpzuiWXo3Z+3ytYMm+FHn78CFauJ9bL37suGGUpTgKxXPD2
+    V15AFczX9pOiaJ9vu4zage3TT+I97jtTEQJYPmu7c+ashocRqAv8+QoqiqufPzqU
+    AwIDAQAB
+    -----END PUBLIC KEY-----
+</textarea>
 
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />

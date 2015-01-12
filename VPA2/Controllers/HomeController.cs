@@ -99,8 +99,7 @@ namespace VenalPenal.Controllers
                         {
 
                             var fileName = Path.GetFileName(file.FileName);
-                            var newFilename = clientId + "_" + fileName;
-
+                      
                             var fileStream = new Byte[Request.Files[0].ContentLength];
                             var inputStream = file.InputStream;
                             System.IO.Stream MyStream;
@@ -113,10 +112,12 @@ namespace VenalPenal.Controllers
 
                             var client = new RestClient("http://128.199.53.59");
                             var request = new RestRequest(Method.POST);
-                            var contentDisposition = "attachment; filename=\"" + newFilename + "\"; filename*=UTF-8''" + Uri.EscapeDataString(fileName);
+                            var contentDisposition = "attachment; filename=\"" + fileName + "\"; filename*=UTF-8''" + Uri.EscapeDataString(fileName);
                             request.AddHeader("Content-Type", "multipart/formdata");
                             request.AddHeader("Content-Disposition", contentDisposition);
-                            request.AddFile("file", input, fileName);
+                            request.AddParameter("clientId", clientId);
+                            request.AddParameter("fileName", fileName);
+                            request.AddFile("file", input, fileName, "multipart/formdata");
                             RestResponse response = (RestResponse)client.Execute(request);
                             ViewBag.Message = "File uploaded successfully";
                             ModelState.Clear();

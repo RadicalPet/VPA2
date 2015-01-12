@@ -12,6 +12,7 @@ namespace VPA2.Models
     {
        
         public string token { get; set; }
+        public string clientId { get; set; }
 
         public static int getUser(string token)
         {

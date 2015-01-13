@@ -68,7 +68,7 @@ namespace VenalPenal.Controllers
         [HttpPost]
         public ActionResult Documents(HttpPostedFileBase file, DocUpload d)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 if (file == null)
                 {
@@ -98,7 +98,7 @@ namespace VenalPenal.Controllers
                         else
                         {
 
-                            var fileName = Path.GetFileName(file.FileName);
+                            var fileName = Path.GetFileName(file.FileName);   
                       
                             var fileStream = new Byte[Request.Files[0].ContentLength];
                             var inputStream = file.InputStream;

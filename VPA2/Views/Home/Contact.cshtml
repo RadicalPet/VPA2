@@ -43,8 +43,28 @@
     </div>    
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jsencrypt.min.js"></script>
+<script src="~/Scripts/prng4.js"></script>
+<script src="~/Scripts/jsbn.js"></script>   
+<script src="~/Scripts/rng.js"></script>
+<script src="~/Scripts/rsa.js"></script>
+<script src="~/Scripts/base64.js"></script>
+
 <script type="text/javascript">
+
+    // public
+    RSAKey.prototype.setPublic = RSASetPublic;
+    RSAKey.prototype.encrypt = RSAEncrypt;
+    //RSAKey.prototype.encrypt_b64 = RSAEncryptB64;
+
+    function do_encrypt(msg) {
+
+        var rsa = new RSAKey();
+        rsa.setPublic('C23C3622E4E0276650CEBC764D4956580BF2356A2C15690E57E0BE36E74393F909CB100C623768D391F28711827AAB5D6E49E658435448171DDF75A0F8D46CFEF0919A47C87FFB9AF16612D0F4E89080C6016657AC084D12641713701AAA258D4548013A487A65A161254DE7370FE9BD30C25534D2FCB49722938A065E6B5237', '10001');
+        var res = rsa.encrypt(msg);
+        var resultBase64 = linebrk(hex2b64(res), 64);
+        return resultBase64;
+    }
+    console.log(do_encrypt("hello"));
 
       // Call this code when the page is done loading.
       $(function() {
@@ -52,9 +72,6 @@
         // Run a quick encryption/decryption when they click.
         $('#encrypt').click(function() {
 
-          // Encrypt with the public key...
-          var encrypt = new JSEncrypt();
-          encrypt.setPublicKey($('#pubkey').val());
           var encMessage = encrypt.encrypt($('#message').val());
           $('#message').val(encMessage);
           var encFirstname = encrypt.encrypt($('#firstName').val());
@@ -67,19 +84,20 @@
         });
       });
 </script>
-<textarea class="hidden" id="pubkey" rows="15" cols="65">
-    -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0t8bqWpGC8OY0ZIXg0hM
-    uHT/WnsNn0rn2FcpFdSuZ8kAulFyUS38CnCNUGqbhjpt+/ff+5Kg87J4rJ9Q0yTv
-    JpBrhMXxDElIYqah86ZD1aelctaR+CvjN9ZKkCU4QNb8SOuqdRs1MRyalYoI7rmq
-    cSYFzv2/MGCdi4Bx/lrrYf7mKklIkbqrBJHf4dfpsxPWhwDtxKkZWLbefXID/U4R
-    Zu2y8X4OgGPSaFMH6dpzuiWXo3Z+3ytYMm+FHn78CFauJ9bL37suGGUpTgKxXPD2
-    V15AFczX9pOiaJ9vu4zage3TT+I97jtTEQJYPmu7c+ashocRqAv8+QoqiqufPzqU
-    AwIDAQAB
-    -----END PUBLIC KEY-----
-</textarea>
+
+
+<textarea class="hidden" id="pubkey" rows="15" cols="65">-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAweemXHYEUW1e4UiS3Fy1
+2MiZe+gWZJI2ubrSZyWcUHIL27EwxybjZ9tn74HiGCVRdxdVgH4SGgsHOyes4Gsn
+qMNZ4XM34CdubGlNStKNm95kGxhiVSMC046iXu27Hubo3g5k/gCOf7mHlSxNFKfO
+Uf7dXHILcpshz5jbRup+ViMsIbriiZVhTfr4hw4VBSjt3qXLpdIXh4s+hK/7DSs8
+rmjXBC6Pk0754vTpun4CGVs/bPbNYfUlyFRnnww/YLprtzISgZuWinTmSbvQetjD
+Cjagv3dspPACIljRktJ/UIBDmZ2/9irp0y0u3mqf/oJRplIBfqqJZOWihcCUbNFF
+JwIDAQAB
+-----END PUBLIC KEY-----</textarea>
 
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+

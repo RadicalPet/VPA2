@@ -72,13 +72,13 @@
         // Run a quick encryption/decryption when they click.
         $('#encrypt').click(function() {
 
-          var encMessage = encrypt.encrypt($('#message').val());
+          var encMessage = do_encrypt($('#message').val());
           $('#message').val(encMessage);
-          var encFirstname = encrypt.encrypt($('#firstName').val());
+          var encFirstname = do_encrypt($('#firstName').val());
           $('#firstName').val(encFirstname);
-          var encLastname = encrypt.encrypt($('#lastName').val());
+          var encLastname = do_encrypt($('#lastName').val());
           $('#lastName').val(encLastname);
-          var encEmail = encrypt.encrypt($('#email').val());
+          var encEmail = do_encrypt($('#email').val());
           $('#email').val(encEmail);
           
         });

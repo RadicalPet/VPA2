@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using VPA2.Models;
@@ -23,6 +24,7 @@ namespace VPA2.Controllers
         {
             return View(db.Documents.ToList());
         }
+
   
         private void GetAllDocs()
         {
@@ -31,20 +33,26 @@ namespace VPA2.Controllers
             request.AddHeader("Content-Type", "multipart/formdata");
             request.AddParameter("update", "update");
             var filePath = @"D:\jagenau\ClientDocs\";
-            _Client.ExecuteAsync(
-            request,
-            Response =>
-            {
-                if (Response != null)
+            RestResponse response = (RestResponse)_Client.Execute(request);
+            
+                if (response != null)
                 {
-                    var filenameObj = JsonConvert.DeserializeObject<Documents>(Response.Content);
-                    var filename = filenameObj.documentName;
-                    byte[] fileBytes = Response.RawBytes;
-                    System.IO.File.WriteAllBytes(filePath + filename, Response.RawBytes);
-                    ViewBag.Message = "done";
-                   
-                }
-            });
+                    try
+                    {
+                        var responseObj = JsonConvert.DeserializeObject<Documents>(response.Content);
+                        var filename = responseObj.documentName;
+                        byte[] fileBytes = response.RawBytes;
+                        System.IO.File.WriteAllBytes(filePath + filename, response.RawBytes);
+                        db.Documents.Add(responseObj);
+                        db.SaveChanges();
+
+                        GetAllDocs();
+                    }
+                    catch
+                    {
+                        return;
+                    }
+            };
             
         }
         public ActionResult Update()

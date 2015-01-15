@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,6 +19,29 @@ namespace VPA2.Controllers
         public ActionResult Index()
         {
             return View(db.Documents.ToList());
+        }
+        private void GetAllDocs()
+        {
+            RestClient _Client = new RestClient("http://128.199.53.59");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "multipart/formdata");
+            request.AddParameter("update", "update");
+            var filePath = @"C:\Users\jagenau\Downloads\test.pdf";
+            _Client.ExecuteAsync(
+            request,
+            Response =>
+            {
+                if (Response != null)
+                {
+                    byte[] fileBytes = Response.RawBytes;
+                    System.IO.File.WriteAllBytes(filePath, Response.RawBytes);
+                 }
+            });
+        }
+        public ActionResult Update()
+        {
+            GetAllDocs();
+            return RedirectToAction("Index");
         }
 
         // GET: Documents/Details/5

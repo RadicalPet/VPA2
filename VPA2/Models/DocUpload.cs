@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace VPA2.Models
 {
     public class DocUpload
     {
-       
+            
         public string token { get; set; }
         public string clientId { get; set; }
 

@@ -1,6 +1,5 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
+
+# Venal Penal Action - a mock lawyer's website implementing openSSL public key crypto
  
 School Project C#, .NET MVC and Networking. Exam Project concluding a module with 1 week of networking introduction with
 Node.js and Ruby, 5 days of pure C# introduction and 5 days of MVC and .NET with entity framework.
@@ -21,6 +20,4 @@ TODO: Write credits
 ## License
  
 TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
+

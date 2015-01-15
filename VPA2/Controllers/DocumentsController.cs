@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,6 +16,8 @@ namespace VPA2.Controllers
     {
         private ClientContext db = new ClientContext();
 
+        private string filename { get; set; } 
+
         // GET: Documents
         public ActionResult Index()
         {
@@ -26,22 +29,29 @@ namespace VPA2.Controllers
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "multipart/formdata");
             request.AddParameter("update", "update");
-            var filePath = @"C:\Users\jagenau\Downloads\test.pdf";
+            var filePath = @"D:\jagenau\Documents\Visual Studio 2013\Projects\VPA2\VPA2\ClientDocs\";
             _Client.ExecuteAsync(
             request,
             Response =>
             {
                 if (Response != null)
                 {
+                    var filenameObj = JsonConvert.DeserializeObject<Documents>(Response.Content);
+                    var filename = filenameObj.documentName;
                     byte[] fileBytes = Response.RawBytes;
-                    System.IO.File.WriteAllBytes(filePath, Response.RawBytes);
-                 }
+                    System.IO.File.WriteAllBytes(filePath + filename, Response.RawBytes);
+
+                }
+            
             });
+            
         }
         public ActionResult Update()
         {
             GetAllDocs();
+      
             return RedirectToAction("Index");
+            
         }
 
         // GET: Documents/Details/5

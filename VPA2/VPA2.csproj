@@ -238,6 +238,7 @@
     <Content Include="Views\Documents\Edit.cshtml" />
     <Content Include="Views\Documents\Index.cshtml" />
     <Content Include="Views\Home\Documents.cshtml" />
+    <Content Include="Views\Documents\Update.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

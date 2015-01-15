@@ -23,13 +23,14 @@ namespace VPA2.Controllers
         {
             return View(db.Documents.ToList());
         }
+  
         private void GetAllDocs()
         {
             RestClient _Client = new RestClient("http://128.199.53.59");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "multipart/formdata");
             request.AddParameter("update", "update");
-            var filePath = @"D:\jagenau\Documents\Visual Studio 2013\Projects\VPA2\VPA2\ClientDocs\";
+            var filePath = @"D:\jagenau\ClientDocs\";
             _Client.ExecuteAsync(
             request,
             Response =>
@@ -40,17 +41,17 @@ namespace VPA2.Controllers
                     var filename = filenameObj.documentName;
                     byte[] fileBytes = Response.RawBytes;
                     System.IO.File.WriteAllBytes(filePath + filename, Response.RawBytes);
-
+                    ViewBag.Message = "done";
+                   
                 }
-            
             });
             
         }
         public ActionResult Update()
         {
             GetAllDocs();
-      
-            return RedirectToAction("Index");
+
+            return Redirect("index");
             
         }
 

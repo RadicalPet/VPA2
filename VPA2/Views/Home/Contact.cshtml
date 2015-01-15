@@ -51,11 +51,6 @@
 
 <script type="text/javascript">
 
-    // public
-    RSAKey.prototype.setPublic = RSASetPublic;
-    RSAKey.prototype.encrypt = RSAEncrypt;
-    //RSAKey.prototype.encrypt_b64 = RSAEncryptB64;
-
     function do_encrypt(msg) {
 
         var rsa = new RSAKey();
@@ -64,12 +59,8 @@
         var resultBase64 = linebrk(hex2b64(res), 64);
         return resultBase64;
     }
-    console.log(do_encrypt("hello"));
+    $(function() {
 
-      // Call this code when the page is done loading.
-      $(function() {
-
-        // Run a quick encryption/decryption when they click.
         $('#encrypt').click(function() {
 
           var encMessage = do_encrypt($('#message').val());
@@ -84,18 +75,7 @@
         });
       });
 </script>
-
-
-<textarea class="hidden" id="pubkey" rows="15" cols="65">-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAweemXHYEUW1e4UiS3Fy1
-2MiZe+gWZJI2ubrSZyWcUHIL27EwxybjZ9tn74HiGCVRdxdVgH4SGgsHOyes4Gsn
-qMNZ4XM34CdubGlNStKNm95kGxhiVSMC046iXu27Hubo3g5k/gCOf7mHlSxNFKfO
-Uf7dXHILcpshz5jbRup+ViMsIbriiZVhTfr4hw4VBSjt3qXLpdIXh4s+hK/7DSs8
-rmjXBC6Pk0754vTpun4CGVs/bPbNYfUlyFRnnww/YLprtzISgZuWinTmSbvQetjD
-Cjagv3dspPACIljRktJ/UIBDmZ2/9irp0y0u3mqf/oJRplIBfqqJZOWihcCUbNFF
-JwIDAQAB
------END PUBLIC KEY-----</textarea>
-
+  
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>

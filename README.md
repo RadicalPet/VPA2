@@ -7,7 +7,7 @@ Also concluding the first semester of a 3 semester BA in web development at Cope
  
 ## Project Description ##
 
-There are 3 servers, the IIS (C#), python and node.js
+There are 3 servers, the IIS (C#) on Windows and python and node.js on Debian. 
 Both, the python and node.js server are behind an HAproxy server and listen to 3 ports. The HAproxy server does a simple roundrobin loadbalancing between those 3 ports.
 
 Each server (instance) contains its own private key and one of the other servers' public keys. The goal of this is to have the data in the database physically separeted from the private key to decrypt it, to provide proxies for the dataflow, have dedicated servers for different computing tasks and to keep the data in transfer as secure as possible.

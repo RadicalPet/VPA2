@@ -51,7 +51,7 @@ The keypairs are not included in the solution and can be generated on a unix bas
 
 The modulus string (different format of a public key) used in my JavaScript implementation via the jsbn (and related) JavaScript crypto libs (credited below) is achieved like:
  
-			openssl rsa -in key.pem -noout -modulus
+		openssl rsa -in key.pem -noout -modulus
 
 ## Modules, packages, libraries and Credits
 
@@ -59,7 +59,7 @@ The used libraries, node modules, python and nuGET packages can of course be see
 
 Nonetheless do I need to credit:
 
-			http://www-cs-students.stanford.edu/~tjw/jsbn/
+		http://www-cs-students.stanford.edu/~tjw/jsbn/
 
 for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing the skeleton code for almost everything and Windows for not being even buggier and awkward than it is.
  

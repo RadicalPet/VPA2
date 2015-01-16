@@ -10,6 +10,12 @@ using System.IO;
 using System.Web.Caching;
 using System.Text;
 using System.Drawing;
+using System.Net.Mail;
+using System.Net;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Crypto.Encodings;
+using Org.BouncyCastle.Crypto.Engines;
 
 
 namespace VenalPenal.Controllers
@@ -17,11 +23,63 @@ namespace VenalPenal.Controllers
     public class HomeController : Controller
     {
         private ClientContext db = new ClientContext();
+        public void sendMailTo(string emailEmp, string subject, string body)
+        {
+            MailMessage message = new System.Net.Mail.MailMessage(); 
+            string fromEmail = "sahara.braun@gmail.com";
+            string fromPW = "xxxxxxxxx";
+            string toEmail = emailEmp;
+            message.From = new MailAddress(fromEmail);
+            message.To.Add(toEmail);
+            message.Subject = subject;
+            message.Body = body;
+            message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential(fromEmail, fromPW);
+
+            smtpClient.Send(message.From.ToString(), message.To.ToString(), 
+            message.Subject, message.Body);   
+        }
+        public string retrievePlaintextEmail(string encEmail)
+        {
+
+            var client = new RestClient("http://178.62.247.139:9002");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.RequestFormat = DataFormat.Json;
+
+            request.AddParameter("email", encEmail);
+
+            RestResponse response = (RestResponse)client.Execute(request);
+            var responseString = response.Content;
+            // raw content as string
+            if (!string.IsNullOrEmpty(responseString))
+            {
+                var responseObject = JsonConvert.DeserializeObject<Clients>(responseString);
+                var bytesEmail = Convert.FromBase64String(responseObject.email);
+
+                AsymmetricCipherKeyPair keyPair;
+
+                using (var reader = System.IO.File.OpenText(@"C:\Users\jagenau\Source\Repos\VPA3\VPA2\Assets\pyKey.pem"))
+                    // file containing RSA PKCS1 private key
+                    keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
+
+                var decryptEngine = new Pkcs1Encoding(new RsaEngine());
+                decryptEngine.Init(false, keyPair.Private);
+
+                return Encoding.UTF8.GetString(decryptEngine.ProcessBlock(bytesEmail, 0, bytesEmail.Length));
+            }
+            return "failure";
+        }
+   
         public ActionResult Index()
         {
             return View();
         }
-
         public ActionResult About()
         {
             ViewBag.Message = "Hurr - we lawyers durr";
@@ -55,7 +113,8 @@ namespace VenalPenal.Controllers
                     var responseObject = JsonConvert.DeserializeObject<Clients>(responseString);
                     db.Clients.Add(responseObject);
                     db.SaveChanges();
-                    @ViewBag.Success = response.Content;
+                    sendMailTo("ominousomnivore@googlemail.com", "New Contact signed up", "Please look into their message at your earliest conveniance");
+                    sendMailTo(retrievePlaintextEmail(responseObject.email), "Your Document Upload Token", "You can use this unique token to upload relevant documents to our servers: " + responseObject.uniqueToken);
                 }
                 return View();
             }

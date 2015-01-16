@@ -26,6 +26,8 @@ The client data gets displayed encrypted in the CMS with only token and clientId
  
 There are a couple of absolute Pathes in the Home Controller, for File Uploads and the IIS private key (the node public key is stored as modulus string in the JavaScript).
 
+The smtp client connects to "smtp.gmail.com", so gmail credentials have to be provided.
+
 Node can be run as service with 
 
 		forever start server.js

@@ -39,8 +39,8 @@ The scheduled task in bash is done by incron and the command to convert into pdf
 		incrontab -e
 		/root/uploads IN_MOVED_TP unoconv /root/uploads/$#
 
-The included haproxy.cfg file (usually located in /etc/haproxy/), has to be added to the respective IP address of where the servers are run or "" for localhost.
-RestSharp also needs teh right ip addresses and/or path.
+The included haproxy.cfg file (usually located in /etc/haproxy/), has to be edited with the respective IP addresses of the servers or "" for localhost.
+RestSharp of course also needs the right ip addresses and/or path.
 
 Python is run as multithreaded http server and I did not have the time to completely daemonize it (I had to daemonize the threads, to be able to keyboard interrupt and make the ports free again, but did not have the time to read into how to do that with the entire script), so it dies with its shell unfortunately.
 
@@ -63,7 +63,7 @@ Nonetheless do I need to credit:
 
 		http://www-cs-students.stanford.edu/~tjw/jsbn/
 
-for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing the skeleton code for almost everything and Windows for not being even buggier and awkward than it is.
+for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing tons of skeleton code and answers and Windows for not being even buggier and awkward than it is.
  
 ## License
  

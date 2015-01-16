@@ -63,7 +63,7 @@ namespace VPA2.Controllers
 
                     AsymmetricCipherKeyPair keyPair;
 
-                    using (var reader = System.IO.File.OpenText(@"C:\Users\jagenau\Source\Repos\VPA2\VPA2\Assets\pyKey.pem")) 
+                    using (var reader = System.IO.File.OpenText(@"C:\Users\jagenau\Source\Repos\VPA3\VPA2\Assets\pyKey.pem")) 
                     // file containing RSA PKCS1 private key
                     keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
 

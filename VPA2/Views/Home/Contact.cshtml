@@ -7,41 +7,49 @@
 
 @using (Html.BeginForm())
 {
-    <div class="form-horizontal" role="form">
-        <fieldset>
-            @Html.ValidationSummary(true)
 
-            <div class="form-group">
-                <div class="col-sm-2"></div>
-                @Html.ValidationMessageFor(model => model.firstName)
-                <br />
-                @Html.LabelFor(model => model.firstName, "First Name", new { @class = "control-label col-sm-2" })
-                @Html.EditorFor(model => model.firstName)
+<div class="container">
+    <div class="row">
+        
+            <div class="col-lg-6">
+                <div class="">@Html.ValidationMessageFor(model => model.firstName)</div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.firstName, "First Name")
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.firstName, new { @class="form-control" , @placeholder="Enter First Name"})
+                    </div>
+                </div>
+                <div class="">@Html.ValidationMessageFor(model => model.lastName)</div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.lastName, "Last Name")
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @placeholder = "Enter Last Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.email, "Your Email")
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", @placeholder = "Enter Email" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.message, "Message")
+                    <div class="input-group">
+                        @Html.TextAreaFor(model => model.message, new { @class = "form-control", @rows = "5" })
+                        <img width="100" class="open" src="http://cdn.flaticon.com/png/256/24417.png" alt="Closed Padlock" />
+                        <img width="100" class="hidden closed" src="http://cdn.flaticon.com/png/256/24258.png" alt="Open Padlock" />
+                    </div>
+                </div>
+                <input type="button"  value="encrypt" id="encrypt" class="btn btn-success pull-left" />
+                <input type="submit" value="submit" id="send" class="btn btn-danger pull-right" />
             </div>
-            <div class="form-group">
-                <div class="col-sm-2"></div>
-                @Html.ValidationMessageFor(model => model.lastName)
-                <br />
-                @Html.LabelFor(model => model.lastName, "Last Name", new { @class = "control-label col-sm-2" })
-                @Html.EditorFor(model => model.lastName)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.email, "Email", new { @class = "control-label col-sm-2" })
-                @Html.EditorFor(model => model.email)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.message, "Message", new { @class = "control-label col-sm-2" })
-                @Html.TextAreaFor(model => model.message, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2"></div>
-                <input type="button" value="encrypt" id="encrypt" class="col-sm-1" />
-                <div class="col-sm-2"></div>
-                <input type="submit" value="submit" class="col-sm-1" />
-            </div>
-        </fieldset>
-    </div>    
+
+    </div>
+
+</div>
+    
 }
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/prng4.js"></script>
 <script src="~/Scripts/jsbn.js"></script>   
@@ -71,13 +79,13 @@
           $('#lastName').val(encLastname);
           var encEmail = do_encrypt($('#email').val());
           $('#email').val(encEmail);
+          $('#send').removeClass('btn-danger');
+          $('#send').addClass('btn-success');
+          $('.open').addClass('hidden');
+          $('.closed').removeClass('hidden');
           
         });
       });
 </script>
-  
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
 

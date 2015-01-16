@@ -6,27 +6,29 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Success</h3>
 
+
 @using (Html.BeginForm("Documents", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="form-horizontal">
-        <h4>Upload Documents</h4>
-        <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                 <div class="">@Html.ValidationMessage("Token")</div>
+                 <div class="form-group">
+                      @Html.LabelFor(model => model.token, "Token")
+                      <div class="input-group"> 
+                            @Html.TextBoxFor(model => model.token, new { @class = "form-control" })
+                      </div>
+                  </div>
+                  <div class="">@Html.ValidationMessage("File")</div>
+                  <div class="form-group">
+                       <label for="file">Upload Documents or image files</label>
+                      <div class="input-group">
+                          <input type="file" name="file" class="form-control"/>
+                      </div>
+                  </div>
+                  <input type="submit" value="Upload" class="btn btn-primary" />
+             </div>
+          </div>
+       </div>
 
-        <div class="form-group">
-            @Html.ValidationMessage("Token", new { @class = "control-label col-sm-2" })
-            <br />
-            @Html.LabelFor(model => model.token, "Token", new { @class = "control-label col-sm-2" })
-            @Html.EditorFor(model => model.token, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.ValidationMessage("File")
-            <label for="file" class="col-md-2">Filename:</label>
-            <input type="file" name="file" />
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Upload" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}  
+}

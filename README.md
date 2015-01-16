@@ -39,7 +39,7 @@ The scheduled task in bash is done by incron and the command to convert into pdf
 		incrontab -e
 		/root/uploads IN_MOVED_TP unoconv /root/uploads/$#
 
-The included haproxy.cfg file, has to be added to the respective IP address of where the servers are run or "" for localhost.
+The included haproxy.cfg file (usually located in /etc/haproxy/), has to be added to the respective IP address of where the servers are run or "" for localhost.
 RestSharp also needs teh right ip addresses and/or path.
 
 Python is run as multithreaded http server and I did not have the time to completely daemonize it (I had to daemonize the threads, to be able to keyboard interrupt and make the ports free again, but did not have the time to read into how to do that with the entire script), so it dies with its shell unfortunately.

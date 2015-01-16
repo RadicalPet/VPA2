@@ -8,11 +8,11 @@ Also concluding the first semester of a 3 semester BA in web development at Cope
 ## Project Description ##
 
 There are 3 servers, the IIS (C#) on Windows and python and node.js on Debian. 
-Both, the python and node.js server are behind an HAproxy server and listen to 3 ports. The HAproxy server does a simple roundrobin loadbalancing between those 3 ports.
+Both, the python and node.js server are behind an HAproxy server and listen to 3 ports. HAproxy does a simple roundrobin loadbalancing between those 3 ports.
 
 Each server (instance) contains its own private key and one of the other servers' public keys. The goal of this is to have the data in the database physically separeted from the private key to decrypt it, to provide proxies for the dataflow, have dedicated servers for different computing tasks and to keep the data in transfer as secure as possible.
 The keypairs are generated via openSSL and are only 1024 bit RSA and use the near deprecated  PKCS#1v.1.5 padding.
-Since it is only a proof of concept and not even security focused school project this should be not too unsettling I chose it mostly for library/package compatibility reasons, as well as slightly shorter processing times.
+Since it is only a proof of concept and not even security focused school project, this should be not too unsettling. I chose it mostly for library/package compatibility reasons, as well as slightly shorter processing times.
 
 A new client can get in contact via the contact form, where they click a button for clientside encryption with the node servers public key. Via Restsharp (http POST request), the data gets the send to node as JSON object. On the node server it gets decrypted, encrypted with the python server's public key, a unique token is added in plaintext and the data is sent back to RestSharp as response. C# stores the encrypted data into the database, but sends the emailaddress on to the python server. Here it gets decrypted, encrypted with the IIS public key and sent back to C#. C# decrypts it and now sends one email to an employee, notifying about a new message/client and one email to the client, providing them with the unique token.
 
@@ -24,7 +24,7 @@ The client data gets displayed encrypted in the CMS with only token and clientId
 
 ## Setup and Configuration
  
-There are a couple of absolute Pathes in the Home Controller, for File Uploads and the IIS private key (the node public key is stored as modulus string in the JavaScript).
+There are a couple of absolute Pathes in the Home Controller, for File Downloads and the IIS private key (the node public key is stored as modulus string in the JavaScript).
 
 The smtp client connects to "smtp.gmail.com", so gmail credentials have to be provided.
 

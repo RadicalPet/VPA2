@@ -28,14 +28,14 @@ There are a couple of absolute Pathes in the Home Controller, for File Uploads a
 
 Node can be run as service with 
 
-  forever start server.js
+		forever start server.js
 
 after installling the forever module via npm.
 
 The scheduled task in bash is done by incron and the command to convert into pdf is part of some libreoffice coreutils, that run as service in the background.
 
- incrontab -e
- /root/uploads IN_MOVED_TP unoconv /root/uploads/$#
+		incrontab -e
+		/root/uploads IN_MOVED_TP unoconv /root/uploads/$#
 
 The included haproxy.cfg file, has to be added to the respective IP address of where the servers are run or "" for localhost.
 RestSharp also needs teh right ip addresses and/or path.
@@ -46,12 +46,12 @@ In python and node the keys are in the same directory as the server. The /upload
 
 The keypairs are not included in the solution and can be generated on a unix based system with openSSL installed via
  
-  openssl genrsa -out key.pem
-  openssl rsa -in mykey.pem -pubout > mykey.pub
+		openssl genrsa -out key.pem
+ 		openssl rsa -in mykey.pem -pubout > mykey.pub
 
 The modulus string (different format of a public key) used in my JavaScript implementation via the jsbn (and related) JavaScript crypto libs (credited below) is achieved like:
  
-  openssl rsa -in key.pem -noout -modulus
+			openssl rsa -in key.pem -noout -modulus
 
 ## Modules, packages, libraries and Credits
 
@@ -59,7 +59,7 @@ The used libraries, node modules, python and nuGET packages can of course be see
 
 Nonetheless do I need to credit:
 
-  http://www-cs-students.stanford.edu/~tjw/jsbn/
+			http://www-cs-students.stanford.edu/~tjw/jsbn/
 
 for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing the skeleton code for almost everything and Windows for not being even buggier and awkward than it is.
  

@@ -49,7 +49,7 @@ In python and node the keys are in the same directory as the server. The /upload
 The keypairs are not included in the solution and can be generated on a unix based system with openSSL installed via
  
 		openssl genrsa -out key.pem
- 		openssl rsa -in mykey.pem -pubout > mykey.pub
+ 		openssl rsa -in key.pem -pubout > key.pub
 
 The modulus string (different format of a public key) used in my JavaScript implementation via the jsbn (and related) JavaScript crypto libs (credited below) is achieved like:
  

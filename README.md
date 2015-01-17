@@ -57,7 +57,7 @@ The modulus string (different format of a public key) used in my JavaScript impl
 
 ## Modules, packages, libraries and Credits
 
-The used libraries, node modules, python and nuGET packages can of course be seen in the script / are included in the solution as far as C# goes.
+The used libraries, node modules, python and nuGet packages can of course be seen in the script / are included in the solution as far as C# goes.
 
 Nonetheless do I need to credit the [stanford computer science department] (http://www-cs-students.stanford.edu/~tjw/jsbn/) for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing tons of skeleton code and answers and Windows for not being even buggier and awkward than it is.
  

@@ -59,14 +59,10 @@ The modulus string (different format of a public key) used in my JavaScript impl
 
 The used libraries, node modules, python and nuGET packages can of course be seen in the script / are included in the solution as far as C# goes.
 
-Nonetheless do I need to credit:
-
-		http://www-cs-students.stanford.edu/~tjw/jsbn/
-
-for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing tons of skeleton code and answers and Windows for not being even buggier and awkward than it is.
+Nonetheless do I need to credit the [stanford computer science department] (http://www-cs-students.stanford.edu/~tjw/jsbn/) for their comprehesive demo and straightforward JavaScript cryptolibraries, stackoverflow for providing tons of skeleton code and answers and Windows for not being even buggier and awkward than it is.
  
 ## License
  
  Most code only modified by me, so whatever the original code goes by, from my side:
- GPLv2
+ [GPLv2] (http://www.gnu.org/licenses/gpl-2.0.html)
 

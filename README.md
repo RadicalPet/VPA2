@@ -3,7 +3,7 @@
  
 School Project C#, .NET MVC and Networking. Exam Project concluding a module with 1 week of networking introduction with
 Node.js and Ruby, 5 days of pure C# introduction and 5 days of MVC and .NET with entity framework.
-Also concluding the first semester of a 3 semester BA in web development at Copenhagen School of design and Technology.
+Also concluding the first semester of a 3 semester BA in web development at Copenhagen School of Design and Technology.
  
 ## Project Description ##
 
@@ -55,7 +55,7 @@ The modulus string (different format of a public key) used in my JavaScript impl
  
 		openssl rsa -in key.pem -noout -modulus
 
-## Modules, packages, libraries and Credits
+## Modules, packages, libraries and credits
 
 The used libraries, node modules, python and nuGet packages can of course be seen in the script / are included in the solution as far as C# goes.
 

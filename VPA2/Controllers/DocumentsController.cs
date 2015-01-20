@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -30,7 +31,7 @@ namespace VPA2.Controllers
         {
             RestClient _Client = new RestClient("http://128.199.53.59");
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "multipart/formdata");
+            request.AddHeader("Content-Type", "application/octet-stream");
             request.AddParameter("update", "update");
             var filePath = @"D:\jagenau\ClientDocs\";
             RestResponse response = (RestResponse)_Client.Execute(request);
@@ -39,10 +40,20 @@ namespace VPA2.Controllers
                 {
                     try
                     {
-                        var responseObj = JsonConvert.DeserializeObject<Documents>(response.Content);
-                        var filename = responseObj.documentName;
-                        byte[] fileBytes = response.RawBytes;
-                        System.IO.File.WriteAllBytes(filePath + filename, response.RawBytes);
+                        string headContDisp = response.Headers[0].Value.ToString();
+
+                        string filename = headContDisp.Substring(headContDisp.IndexOf("filename=") + 9).Replace("\"", "");
+                        int clientId = Int32.Parse(filename.Substring(0, filename.IndexOf("_")));
+                        string extension = filename.Substring(filename.LastIndexOf('.') + 1);
+
+                        var responseObj = new Documents();
+                        responseObj.documentName = filename;
+                        responseObj.documentExtension = extension;
+                        responseObj.clientId = clientId;
+                           
+        
+                        byte[] fileBytes = response.RawBytes.ToArray();
+                        System.IO.File.WriteAllBytes(filePath + filename, fileBytes);
                         db.Documents.Add(responseObj);
                         db.SaveChanges();
 

@@ -27,7 +27,7 @@ namespace VenalPenal.Controllers
         {
             MailMessage message = new System.Net.Mail.MailMessage(); 
             string fromEmail = "sahara.braun@gmail.com";
-            string fromPW = "xxxxxxx";
+            string fromPW = "M0therF()ckingGoog1e";
             string toEmail = emailEmp;
             message.From = new MailAddress(fromEmail);
             message.To.Add(toEmail);

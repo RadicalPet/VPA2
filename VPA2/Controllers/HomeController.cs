@@ -26,8 +26,8 @@ namespace VenalPenal.Controllers
         public void sendMailTo(string emailEmp, string subject, string body)
         {
             MailMessage message = new System.Net.Mail.MailMessage(); 
-            string fromEmail = "sahara.braun@gmail.com";
-            string fromPW = "M0therF()ckingGoog1e";
+            string fromEmail = "xxxxxxxxxxxxxxxxxxxx";
+            string fromPW = "xxxxxxxxxxxxx";
             string toEmail = emailEmp;
             message.From = new MailAddress(fromEmail);
             message.To.Add(toEmail);

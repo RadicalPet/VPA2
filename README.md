@@ -1,8 +1,7 @@
 
-# Venal Penal Action - a mock lawyer's website implementing openSSL public key crypto
- 
-School Project C#, .NET MVC and Networking. Exam Project concluding a module with 1 week of networking introduction with
-Node.js and Ruby, 5 days of pure C# introduction and 5 days of MVC and .NET with entity framework.
+# Venal Penal Action - a mock lawyer's website
+
+School Project C#, .NET MVC and Networking. Exam Project concluding a module with 1 week of networking introduction with Node.js and Ruby, 5 days of pure C# introduction and 5 days of MVC and .NET with entity framework.
 Also concluding the first semester of a 3 semester BA in web development at Copenhagen School of Design and Technology.
  
 ## Project Description ##
@@ -42,11 +41,11 @@ The scheduled task in bash is done by incron and the command to convert into pdf
 The included haproxy.cfg file (usually located in /etc/haproxy/), has to be edited with the respective IP addresses of the servers or "" for localhost.
 RestSharp of course also needs the right ip addresses and/or path.
 
-Python is run as multithreaded http server and I did not have the time to completely daemonize it (I had to daemonize the threads, to be able to keyboard interrupt and make the ports free again, but did not have the time to read into how to do that with the entire script), so it dies with its shell unfortunately.
+Python is run as multithreaded http server and I did not have the time to completely daemonize it, so it dies with its shell unfortunately.
 
 In python and node the keys are in the same directory as the server. The /uploads and /received are one above node.
 
-The keypairs are not included in the solution and can be generated on a unix based system with openSSL installed via
+The keypairs are not included in the solution and can be generated with openSSL installed via
  
 		openssl genrsa -out key.pem
  		openssl rsa -in key.pem -pubout > key.pub
